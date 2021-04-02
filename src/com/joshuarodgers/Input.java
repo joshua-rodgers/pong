@@ -12,7 +12,7 @@ public class Input extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         int pressed = e.getKeyCode();
-        System.out.println("down");
+        //System.out.println("down");
         switch(pressed){
             case 87: // p1 Up 'W'
                 game.left_paddle.direction = -1;
@@ -27,7 +27,7 @@ public class Input extends KeyAdapter {
                 break;
 
             case 40: // p2 down 'down arrow'
-                game.right_paddle.direction = -1;
+                game.right_paddle.direction = 1;
                 break;
 
             default:
@@ -37,7 +37,7 @@ public class Input extends KeyAdapter {
     @Override
     public void keyReleased(KeyEvent e) {
         int released = e.getKeyCode();
-        System.out.println("up");
+        //System.out.println("up");
         switch(released){
             case 87: // p1 Up 'W'
                 game.left_paddle.direction = 0;

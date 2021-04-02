@@ -16,6 +16,7 @@ public class Pong{
     Panel game_surface;
     Input game_input;
     Physics physics;
+    Collision collision;
     Color background_color;
 
     Paddle left_paddle;
@@ -75,6 +76,7 @@ public class Pong{
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
 
         physics = new Physics(left_paddle, right_paddle, game_ball);
+        collision = new Collision(game_window, left_paddle, right_paddle, game_ball, physics);
     }
 
     public void init_graphics(){
@@ -93,6 +95,8 @@ public class Pong{
     public void run(){
         while(true){
             try{
+                physics.update();
+                collision.check_collision();
                 render();
                 Thread.sleep(100);
             }catch(Exception e){
