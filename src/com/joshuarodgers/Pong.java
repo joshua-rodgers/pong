@@ -15,6 +15,7 @@ public class Pong{
     Frame game_window;
     Panel game_surface;
     Input game_input;
+    Physics physics;
     Color background_color;
 
     Paddle left_paddle;
@@ -72,6 +73,8 @@ public class Pong{
         ball_color = Color.GREEN;
         ball_start_position = new Point((game_surface.getWidth() / 2) - (ball_width / 2), (game_surface.getHeight() / 2) - (ball_height / 2));
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
+
+        physics = new Physics(left_paddle, right_paddle, game_ball);
     }
 
     public void init_graphics(){
