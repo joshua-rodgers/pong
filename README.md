@@ -3,7 +3,7 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
-![pong gameplay, green ball](demos/demo2.png)
+![pong gameplay, green ball](demos/demo2.gif)
 
 so i have built pong. from scratch, off the top of my head. yesss. why was this such a big deal for me? well,
 i see pong as the simplest expression of what a 2d game is. it has all the pieces of any more complex game, 
