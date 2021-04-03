@@ -15,19 +15,35 @@ public class Input extends KeyAdapter {
         //System.out.println("down");
         switch(pressed){
             case 87: // p1 Up 'W'
-                game.left_paddle.direction = -1;
+                if(game.left_paddle.position.y > 0){
+                    game.left_paddle.direction = -1;
+                }else{
+                    game.left_paddle.direction = 0;
+                }
                 break;
 
             case 83: // p1 down 'S'
-                game.left_paddle.direction = 1;
+                if(game.left_paddle.position.y + game.left_paddle.height < game.window_height){
+                    game.left_paddle.direction = 1;
+                }else{
+                    game.left_paddle.direction = 0;
+                }
                 break;
 
             case 38: // p2 up 'up arrow'
-                game.right_paddle.direction = -1;
+                if(game.right_paddle.position.y > 0){
+                    game.right_paddle.direction = -1;
+                }else{
+                    game.right_paddle.direction = 0;
+                }
                 break;
 
             case 40: // p2 down 'down arrow'
-                game.right_paddle.direction = 1;
+                if(game.right_paddle.position.y + game.right_paddle.height < game.window_height){
+                    game.right_paddle.direction = 1;
+                }else{
+                    game.right_paddle.direction = 0;
+                }
                 break;
 
             default:

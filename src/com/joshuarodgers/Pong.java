@@ -76,7 +76,7 @@ public class Pong{
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
 
         physics = new Physics(left_paddle, right_paddle, game_ball);
-        collision = new Collision(game_window, left_paddle, right_paddle, game_ball, physics);
+        collision = new Collision(game_surface, left_paddle, right_paddle, game_ball, physics);
     }
 
     public void init_graphics(){

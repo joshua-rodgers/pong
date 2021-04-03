@@ -17,9 +17,9 @@ public class Physics {
         this.right = right;
         this.ball = ball;
 
-        paddle_speed = 20;
+        paddle_speed = 25;
         ball_speed_x = 20;
-        ball_speed_y = 10;
+        ball_speed_y = 20;
     }
 
     public void update(){
