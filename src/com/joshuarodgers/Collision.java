@@ -28,16 +28,32 @@ public class Collision {
 
     public void check_collision(){
         if(ball.position.x <= west){
-            ball.x_direction = 1;
+            ball.position.x = game_window.getWidth() / 2;
+            ball.position.y = game_window.getHeight() /2;
         }
         if(ball.position.x >= east){
-            ball.x_direction = -1;
+            ball.position.x = game_window.getWidth() / 2;
+            ball.position.y = game_window.getHeight() /2;
         }
         if(ball.position.y <= north){
             ball.y_direction = 1;
         }
         if(ball.position.y >= south){
             ball.y_direction = -1;
+        }
+        if(ball.position.x <= left.position.x){
+            if(ball.position.y >= left.position.y){
+                if(ball.position.y <= left.position.y + left.height){
+                    ball.x_direction = 1;
+                }
+            }
+        }
+        if(ball.position.x >= right.position.x){
+            if(ball.position.y >= right.position.y){
+                if(ball.position.y <= right.position.y + right.height){
+                    ball.x_direction = -1;
+                }
+            }
         }
     }
 
