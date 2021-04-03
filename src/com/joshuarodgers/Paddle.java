@@ -8,12 +8,11 @@ public class Paddle {
     int height;
     Color color;
 
+    int score;
+
     Point position;
     int speed;
     int direction;
-
-
-    
 
     public Paddle(int width, int height, Point position, Color color){
         this.width = width;
@@ -22,9 +21,6 @@ public class Paddle {
 
         this.position = position;
         direction = 0;
-
+        score = 0;
     }
-
-    
-
 }

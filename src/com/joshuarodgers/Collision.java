@@ -44,10 +44,12 @@ public class Collision {
         if(ball.position.x <= west){
             ball.position.x = game_window.getWidth() / 2;
             ball.position.y = game_window.getHeight() /2;
+            right.score++;
         }
         if(ball.position.x + ball.width >= east){
             ball.position.x = game_window.getWidth() / 2;
             ball.position.y = game_window.getHeight() /2;
+            left.score++;
         }
         if(ball.position.y <= north){
             ball.y_direction = 1;

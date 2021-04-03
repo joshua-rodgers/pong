@@ -10,8 +10,6 @@ public class Physics {
 
     int paddle_speed;
 
-
-
     public Physics(Paddle left, Paddle right, Ball ball){
         this.left = left;
         this.right = right;
@@ -28,5 +26,4 @@ public class Physics {
         left.position.y += paddle_speed * left.direction;
         right.position.y += paddle_speed * right.direction;
     }
-    
 }

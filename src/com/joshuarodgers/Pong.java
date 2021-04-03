@@ -4,6 +4,7 @@ import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -32,6 +33,8 @@ public class Pong{
     int ball_height;
     Point ball_start_position;
     Color ball_color;
+
+    int score_player_one;
 
     Graphics ctx_game_surface;
 
@@ -77,19 +80,25 @@ public class Pong{
 
         physics = new Physics(left_paddle, right_paddle, game_ball);
         collision = new Collision(game_surface, left_paddle, right_paddle, game_ball, physics);
+
     }
 
     public void init_graphics(){
         ctx_game_surface = game_surface.getGraphics();
+        ctx_game_surface.setFont(new Font("SERIF", 0, 20));
     }
 
     public void render(){
-        ctx_game_surface.clearRect(0, 0, game_window.getWidth(), game_window.getHeight());
-        ctx_game_surface.setColor(game_ball.color);
+        ctx_game_surface.clearRect(0, 0, game_surface.getWidth(), game_surface.getHeight());
+        ctx_game_surface.setColor(Color.WHITE);
+        ctx_game_surface.drawLine(game_surface.getWidth() / 2, 0, game_surface.getWidth() / 2, game_surface.getHeight());
+        ctx_game_surface.setColor(game_ball.color); 
         ctx_game_surface.fillRect(game_ball.position.x, game_ball.position.y, game_ball.width, game_ball.height);
         ctx_game_surface.setColor(paddle_color);
         ctx_game_surface.fillRect(right_paddle.position.x, right_paddle.position.y, right_paddle.width, right_paddle.height);
         ctx_game_surface.fillRect(left_paddle.position.x, left_paddle.position.y, left_paddle.width, left_paddle.height);
+        ctx_game_surface.drawString(String.valueOf(left_paddle.score), window_width / 4, window_height / 4);
+        ctx_game_surface.drawString(String.valueOf(right_paddle.score), (window_width / 4) + (window_width / 2), window_height / 4);
     }
 
     public void run(){
