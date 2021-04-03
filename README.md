@@ -3,6 +3,21 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
+## set framerate/update rate
+
+![pong gameplay, green ball](demos/demo3.gif)
+
+I fixed a couple bugs, like the paddles going past the screen at times. this was happening because i had broken the separation of concerns of the different modules: i
+was making changes to game model data in the input module. events happen on a separate thread in java and so were taking place despite the update method which is actually 
+the place where the game world progresses. it took a while to figure that out, but im happy with the result. 
+
+i set the framerate to 30 fps. itoyed around with moving rendering into a separate thread before realizing i could do the same thing right in main. ill eventually do a 
+proper game loop, but this is fine for now, though it could stand some backbuffering to stop the flickering.
+
+i also added pause and quit with p and q respectively. next i need to add win states and restarting.
+
+pleased.
+
 ![pong gameplay, green ball](demos/demo2.gif)
 
 so i have built pong. from scratch, off the top of my head. yesss. why was this such a big deal for me? well,
