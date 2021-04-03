@@ -23,4 +23,5 @@ public class Paddle {
         direction = 0;
         score = 0;
     }
+
 }

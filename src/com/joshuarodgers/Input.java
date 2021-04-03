@@ -15,40 +15,31 @@ public class Input extends KeyAdapter {
         //System.out.println("down");
         switch(pressed){
             case 87: // p1 Up 'W'
-                if(game.left_paddle.position.y > 0){
-                    game.left_paddle.direction = -1;
-                }else{
-                    game.left_paddle.direction = 0;
-                }
+                game.physics.left_moving_up = true;
                 break;
 
             case 83: // p1 down 'S'
-                if(game.left_paddle.position.y + game.left_paddle.height < game.window_height){
-                    game.left_paddle.direction = 1;
-                }else{
-                    game.left_paddle.direction = 0;
-                }
+                game.physics.left_moving_down = true;
                 break;
 
             case 38: // p2 up 'up arrow'
-                if(game.right_paddle.position.y > 0){
-                    game.right_paddle.direction = -1;
-                }else{
-                    game.right_paddle.direction = 0;
-                }
+                game.physics.right_moving_up = true;
                 break;
 
             case 40: // p2 down 'down arrow'
-                if(game.right_paddle.position.y + game.right_paddle.height < game.window_height){
-                    game.right_paddle.direction = 1;
-                }else{
-                    game.right_paddle.direction = 0;
-                }
+                game.physics.right_moving_down = true;
+                break;
+            case 80:
+                game.is_paused = !game.is_paused;
+                break;
+            case 81:
+                game.is_running = false;
                 break;
 
             default:
         }
     }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -56,19 +47,19 @@ public class Input extends KeyAdapter {
         //System.out.println("up");
         switch(released){
             case 87: // p1 Up 'W'
-                game.left_paddle.direction = 0;
+                game.physics.left_moving_up = false;
                 break;
 
             case 83: // p1 down 'S'
-                game.left_paddle.direction = 0;
+                game.physics.left_moving_down = false;
                 break;
 
             case 38: // p2 up 'up arrow'
-                game.right_paddle.direction = 0;
+                game.physics.right_moving_up = false;
                 break;
 
             case 40: // p2 down 'down arrow'
-                game.right_paddle.direction = 0;
+                game.physics.right_moving_down = false;
                 break;
 
             default:

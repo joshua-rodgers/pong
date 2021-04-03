@@ -27,6 +27,8 @@ public class Pong{
     Point right_paddle_start_position;
     Point left_paddle_start_position;
     Color paddle_color;
+    boolean is_running;
+    boolean is_paused;
 
     Ball game_ball;
     int ball_width;
@@ -67,8 +69,8 @@ public class Pong{
     private void init_game_objects(){
         paddle_height = 100;
         paddle_width = 10;
-        left_paddle_start_position = new Point(paddle_width / 2, game_surface.getHeight() / 2);
-        right_paddle_start_position = new Point(game_surface.getWidth() - (paddle_width + (paddle_width / 2)), game_surface.getHeight() / 2);
+        left_paddle_start_position = new Point(paddle_width / 2, game_surface.getHeight() / 2 - (paddle_height /2));
+        right_paddle_start_position = new Point(game_surface.getWidth() - (paddle_width + (paddle_width / 2)), game_surface.getHeight() / 2 - (paddle_height /2 ));
         paddle_color = Color.WHITE;
         right_paddle = new Paddle(paddle_width, paddle_height, right_paddle_start_position, paddle_color);
         left_paddle = new Paddle(paddle_width, paddle_height, left_paddle_start_position, paddle_color);
@@ -78,14 +80,14 @@ public class Pong{
         ball_start_position = new Point((game_surface.getWidth() / 2) - (ball_width / 2), (game_surface.getHeight() / 2) - (ball_height / 2));
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
 
-        physics = new Physics(left_paddle, right_paddle, game_ball);
+        physics = new Physics(left_paddle, right_paddle, game_ball, game_surface);
         collision = new Collision(game_surface, left_paddle, right_paddle, game_ball, physics);
 
     }
 
     public void init_graphics(){
         ctx_game_surface = game_surface.getGraphics();
-        ctx_game_surface.setFont(new Font("SERIF", 0, 36));
+        ctx_game_surface.setFont(new Font("SANS_SERIF", 0, 36));
     }
 
     public void render(){
@@ -102,20 +104,32 @@ public class Pong{
     }
 
     public void run(){
-        while(true){
-            try{
-                physics.update();
-                collision.check_collision();
-                render();
-                Thread.sleep(100);
-            }catch(Exception e){
-                e.printStackTrace();
+        is_running = true;
+        while(is_running){
+            if(!is_paused){
+                try{
+                    physics.update();
+                    collision.check_collision();
+                    render();
+                    Thread.sleep(1000/30);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }else{
+                try{
+                    render();
+                    Thread.sleep(500);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         }
+        System.exit(0);
     }
 
     public static void main(String[] args) {
-        new Pong().run();
+        Pong game = new Pong();
+        game.run();
     }
 }
 

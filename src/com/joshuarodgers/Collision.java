@@ -30,47 +30,39 @@ public class Collision {
     }
 
     public void check_collision(){
+        // CHECK PADDLES FIRST SINCE THEY ARE IN FRONT OF E&W EDGES
         if(ball.position.x <= left.position.x + left.width){
             if(ball.position.y >= left.position.y){
                 if(ball.position.y <= left.position.y + left.height){
                     ball.x_direction = 1;
-                    //physics.ball_speed_x = random.nextInt(20);
-                    physics.ball_speed_y = random.nextInt(40);
-                    return;
+                    physics.ball_speed_y = random.nextInt(10);
+                    
                 }
             }
-        }
-        if(ball.position.x >= right.position.x){
+        }else if(ball.position.x >= right.position.x){
             if(ball.position.y >= right.position.y){
                 if(ball.position.y <= right.position.y + right.height){
                     ball.x_direction = -1;
-                    //physics.ball_speed_x = random.nextInt(20);
-                    physics.ball_speed_y = random.nextInt(40);
-                    return;
+                    physics.ball_speed_y = random.nextInt(10);
+                    
                 }
             }
         }
+        // CHECK EDGES
         if(ball.position.x <= west){
             ball.position.x = game_window.getWidth() / 2;
             ball.position.y = game_window.getHeight() /2;
+            physics.ball_speed_y = 0;
             right.score++;
-            return;
-        }
-        if(ball.position.x + ball.width >= east){
+        }else if(ball.position.x + ball.width >= east){
             ball.position.x = game_window.getWidth() / 2;
             ball.position.y = game_window.getHeight() /2;
+            physics.ball_speed_y = 0;
             left.score++;
-            return;
-        }
-        if(ball.position.y <= north){
+        }else if(ball.position.y <= north){
             ball.y_direction = 1;
-            return;
-        }
-        if(ball.position.y + ball.height >= south){
+        }else if(ball.position.y + ball.height >= south){
             ball.y_direction = -1;
-            return;
         }
     }
-
-
 }
