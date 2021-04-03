@@ -85,7 +85,7 @@ public class Pong{
 
     public void init_graphics(){
         ctx_game_surface = game_surface.getGraphics();
-        ctx_game_surface.setFont(new Font("SERIF", 0, 20));
+        ctx_game_surface.setFont(new Font("SERIF", 0, 36));
     }
 
     public void render(){
