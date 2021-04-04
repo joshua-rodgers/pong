@@ -3,6 +3,7 @@ package com.joshuarodgers;
 import java.awt.Frame;
 import java.awt.Panel;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Point;
@@ -42,6 +43,9 @@ public class Pong{
     int score_player_one;
 
     Graphics ctx_game_surface;
+    Image back_buffer;
+    Graphics ctx_back_buffer;
+
 
     public Pong(){
         init_window();
@@ -90,21 +94,31 @@ public class Pong{
 
     public void init_graphics(){
         ctx_game_surface = game_surface.getGraphics();
-        ctx_game_surface.setFont(new Font("SANS_SERIF", 0, 36));
-        message_screen = new Screen(game_surface, ctx_game_surface);
+        back_buffer = game_surface.createImage(game_surface.getWidth(), game_surface.getHeight());
+        ctx_back_buffer = back_buffer.getGraphics();
+        ctx_back_buffer.setFont(new Font("SANS_SERIF", 0, 36));
+        message_screen = new Screen(game_surface.getWidth(), game_surface.getHeight(), ctx_back_buffer);
     }
 
     public void render(){
-        ctx_game_surface.clearRect(0, 0, game_surface.getWidth(), game_surface.getHeight());
-        ctx_game_surface.setColor(Color.WHITE);
-        ctx_game_surface.drawLine(game_surface.getWidth() / 2, 0, game_surface.getWidth() / 2, game_surface.getHeight());
-        ctx_game_surface.setColor(game_ball.color); 
-        ctx_game_surface.fillRect(game_ball.position.x, game_ball.position.y, game_ball.width, game_ball.height);
-        ctx_game_surface.setColor(paddle_color);
-        ctx_game_surface.fillRect(right_paddle.position.x, right_paddle.position.y, right_paddle.width, right_paddle.height);
-        ctx_game_surface.fillRect(left_paddle.position.x, left_paddle.position.y, left_paddle.width, left_paddle.height);
-        ctx_game_surface.drawString(String.valueOf(left_paddle.score), window_width / 4, window_height / 4);
-        ctx_game_surface.drawString(String.valueOf(right_paddle.score), (window_width / 4) + (window_width / 2), window_height / 4);
+        ctx_back_buffer.clearRect(0, 0, game_surface.getWidth(), game_surface.getHeight());
+        ctx_back_buffer.setColor(Color.WHITE);
+        ctx_back_buffer.drawLine(game_surface.getWidth() / 2, 0, game_surface.getWidth() / 2, game_surface.getHeight());
+        ctx_back_buffer.setColor(game_ball.color); 
+        ctx_back_buffer.fillRect(game_ball.position.x, game_ball.position.y, game_ball.width, game_ball.height);
+        ctx_back_buffer.setColor(paddle_color);
+        ctx_back_buffer.fillRect(right_paddle.position.x, right_paddle.position.y, right_paddle.width, right_paddle.height);
+        ctx_back_buffer.fillRect(left_paddle.position.x, left_paddle.position.y, left_paddle.width, left_paddle.height);
+        ctx_back_buffer.drawString(String.valueOf(left_paddle.score), window_width / 4, window_height / 4);
+        ctx_back_buffer.drawString(String.valueOf(right_paddle.score), (window_width / 4) + (window_width / 2), window_height / 4);
+        if(!is_started){
+            message_screen.display("Press SPACE to start");
+        }else if(is_paused){
+            message_screen.display("PAUSED");
+        }else if(is_over){
+            winner();
+        }
+        ctx_game_surface.drawImage(back_buffer, 0, 0, null);
     }
 
     public void winner(){
@@ -133,40 +147,25 @@ public class Pong{
     public void run(){
         is_running = true;
         while(is_running){
-            if(is_over){
                 try{
-                    render();
-                    winner();
-                    Thread.sleep(500);
+                    if(is_over){ // WIN STATE
+                        render();
+                        Thread.sleep(1000);
+                    }else if(!is_paused && is_started){ // RUNNING NORMALLY
+                        physics.update();
+                        collision.check_collision();
+                        render();
+                        Thread.sleep(1000/30);
+                    }else if(is_paused && is_started){ // PAUSED MID-GAME
+                        render();
+                        Thread.sleep(1000);
+                    }else if(!is_started){ // START SCREEN
+                        render();
+                        Thread.sleep(1000);
+                    }
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-            }else if(!is_paused && is_started){
-                try{
-                    physics.update();
-                    collision.check_collision();
-                    render();
-                    Thread.sleep(1000/30);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }else if(is_paused && is_started){
-                try{
-                    render();
-                    message_screen.display("PAUSED");
-                    Thread.sleep(500);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }else if(!is_started){
-                try{
-                    render();
-                    message_screen.display("Press SPACE to start");
-                    Thread.sleep(500);
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-            }
         }
         System.exit(0);
     }
