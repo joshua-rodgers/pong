@@ -3,6 +3,17 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
+## double buffering implemented
+
+i hate that im unable to create a gif with high enough definition to display it, but double buffering has made the graphics super smooth. this was the first time i really 
+fully understood the conceptof double buffering. i went to one of my _vintage_ game dev books, _The Black Art of Java Game Programming_, published in 1996 to make sure i 
+was going about it properly. the explanation there made the concept clear: the flickering that happens when rendering the former, direct way is caused by the call to the 
+clearRect() method that clears the screen before rendering the next frame. all double buffering does is eliminate that step by leaving the former frame displayed and simply 
+dumping the new frame to the screen over the top of it, so the display is never blank and you dont see the contents get drawn. i knew this already, but had never correctly 
+implemented it; if you look at the other little games ive done, even when i use an offscreen image to draw to, i always clear the screen like an idiot anyway :man_facepalming:.
+
+so now i have nowhere to run anymore, i have to implement the intentional ball trajectories based on the area of the paddle contacted. :fearful:
+
 ## message screens, win state, reset
 
 ![pong gameplay show start screen winner message and game reset](demos/demo4.gif)

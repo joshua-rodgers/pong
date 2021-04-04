@@ -23,8 +23,8 @@ public class Collision {
         this.right = right;
         random = new Random();
         north = 0;
-        south = this.game.game_window.getHeight();
-        east = this.game.game_window.getWidth();
+        south = this.game.game_surface.getHeight();
+        east = this.game.game_surface.getWidth();
         west = 0;
     }
 
