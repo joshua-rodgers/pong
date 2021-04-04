@@ -10,8 +10,8 @@ building pong. at last. the essence of 2d games. am i worthy?
 added a start screen and the win state which is triggered when a player reaches 10 points. this wraps the major features. it's now a fully playable game. you can restart 
 at any point by pressing 'r'.
 
-anything further i do after this will be gameplay enhancements. i still intend to make the ball trajectory predictable based on the contact point. that will be the coup de 
-grace for me here.
+anything further i do after this will be gameplay enhancements. i still intend to make the ball trajectory predictable based on the contact point. that will be the finishing 
+touch for me here.
 
 im really happy to have finally built something more or less complete. building pong from scratch has been a goal for a long time. this is big.
 
