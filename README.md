@@ -3,6 +3,21 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
+## predictible vollies
+
+![pong gameplay demonstrating precisely aimed vollies](demos/demo5.gif)
+
+so i divided the paddles into 4 segments with the upper sending the ball upward, the middle two stright across and the lower downward. this makes the game a bit more of a 
+game of skill, since a player may now strategize against an opponent: say your opponent is near the bottom and returns the ball to you near the top edge, you could align 
+your paddle to send the ball straight across, forcing the opponent to race upward. 
+
+implementing this feature was important to me to make the game more complete. interestingly, it now begs another feature, varying speed. the game is just the slightest bit 
+easy now as the vollies are predictible since you can see where on the opposite paddle the ball makes contact and therefore exactly where the ball will go. im thinking of 
+adding the feature of the ball increasing in speed by a fixed amount with each turn, then randomly starting back at base velocity of the ball remains in play for a certain 
+number of turns. this will enhance gameplay quite a bit.
+
+i can see how this could likely go on forever. :smile:
+
 ## double buffering implemented
 
 i hate that im unable to create a gif with high enough definition to display it, but double buffering has made the graphics super smooth. this was the first time i really 

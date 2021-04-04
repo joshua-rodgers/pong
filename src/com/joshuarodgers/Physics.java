@@ -6,7 +6,7 @@ public class Physics {
     Paddle left;
     Paddle right;
     Ball ball;
-    Panel game_window;
+    Panel game_surface;
 
     int ball_speed_x;
     int ball_speed_y;
@@ -17,11 +17,11 @@ public class Physics {
     boolean right_moving_up;
     boolean right_moving_down;
 
-    public Physics(Paddle left, Paddle right, Ball ball, Panel game_window){
+    public Physics(Paddle left, Paddle right, Ball ball, Panel game_surface){
         this.left = left;
         this.right = right;
         this.ball = ball;
-        this.game_window = game_window;
+        this.game_surface = game_surface;
 
         paddle_speed = 10;
         ball_speed_x = 7;
@@ -38,7 +38,7 @@ public class Physics {
                 }
                 break;
             case 1: //down
-                if(left.position.y + left.height <= game_window.getHeight()){
+                if(left.position.y + left.height <= game_surface.getHeight()){
                     left.direction = 1;
                 }else{
                     left.direction = 0;
@@ -52,7 +52,7 @@ public class Physics {
                 }
                 break;
             case 3:
-                if(right.position.y + right.height <= game_window.getHeight()){
+                if(right.position.y + right.height <= game_surface.getHeight()){
                     right.direction = 1;
                 }else{
                     right.direction = 0;

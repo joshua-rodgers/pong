@@ -32,17 +32,44 @@ public class Collision {
         // CHECK PADDLES FIRST SINCE THEY ARE IN FRONT OF E&W EDGES
         if(ball.position.x <= left.position.x + left.width){
             if(ball.position.y >= left.position.y){
-                if(ball.position.y <= left.position.y + left.height){
+                if(ball.position.y <= left.get_segment(1)){
                     ball.x_direction = 1;
-                    physics.ball_speed_y = random.nextInt(10);
-                    
+                    physics.ball_speed_y = 5;
+                    ball.y_direction = -1;
+                }else if(ball.position.y <= left.get_segment(2)){
+                    ball.x_direction = 1;
+                    physics.ball_speed_y = 0;
+                    ball.y_direction = 1;
+                }else if(ball.position.y <= left.get_segment(3)){
+                    ball.x_direction = 1;
+                    physics.ball_speed_y = 0;
+                    ball.y_direction = 1;
+                }else if(ball.position.y <= left.get_segment(4)){
+                    ball.x_direction = 1;
+                    physics.ball_speed_y = 5;
+                    ball.y_direction = 1;
                 }
             }
         }else if(ball.position.x >= right.position.x){
             if(ball.position.y >= right.position.y){
                 if(ball.position.y <= right.position.y + right.height){
-                    ball.x_direction = -1;
-                    physics.ball_speed_y = random.nextInt(10);
+                    if(ball.position.y <= right.get_segment(1)){
+                        ball.x_direction = -1;
+                        physics.ball_speed_y = 5;
+                        ball.y_direction = -1;
+                    }else if(ball.position.y <= right.get_segment(2)){
+                        ball.x_direction = -1;
+                        physics.ball_speed_y = 0;
+                        ball.y_direction = 1;
+                    }else if(ball.position.y <= right.get_segment(3)){
+                        ball.x_direction = -1;
+                        physics.ball_speed_y = 0;
+                        ball.y_direction = 1;
+                    }else if(ball.position.y <= right.get_segment(4)){
+                        ball.x_direction = -1;
+                        physics.ball_speed_y = 5;
+                        ball.y_direction = 1;
+                    }
                     
                 }
             }

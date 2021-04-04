@@ -104,6 +104,7 @@ public class Pong{
         ctx_back_buffer.clearRect(0, 0, game_surface.getWidth(), game_surface.getHeight());
         ctx_back_buffer.setColor(Color.WHITE);
         ctx_back_buffer.drawLine(game_surface.getWidth() / 2, 0, game_surface.getWidth() / 2, game_surface.getHeight());
+        ctx_back_buffer.drawLine(0, 200, 500, 200);
         ctx_back_buffer.setColor(game_ball.color); 
         ctx_back_buffer.fillRect(game_ball.position.x, game_ball.position.y, game_ball.width, game_ball.height);
         ctx_back_buffer.setColor(paddle_color);
