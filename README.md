@@ -3,6 +3,22 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
+## message screens, win state, reset
+
+![pong gameplay show start screen winner message and game reset](demos/demo4.gif)
+
+added a start screen and the win state which is triggered when a player reaches 10 points. this wraps the major features. it's now a fully playable game. you can restart 
+at any point by pressing 'r'.
+
+anything further i do after this will be gameplay enhancements. i still intend to make the ball trajectory predictable based on the contact point. that will be the coup de 
+grace for me here.
+
+im really happy to have finally built something more or less complete. building pong from scratch has been a goal for a long time. this is big.
+
+i wonder if i could add power ups? how far could this go?
+
+this would also be a great chance to practice implementing double buffering...
+
 ## set framerate/update rate
 
 ![pong gameplay, green ball](demos/demo3.gif)

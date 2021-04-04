@@ -14,6 +14,9 @@ public class Input extends KeyAdapter {
         int pressed = e.getKeyCode();
         //System.out.println("down");
         switch(pressed){
+            case 32:
+                game.is_started = true;
+                break;
             case 87: // p1 Up 'W'
                 game.physics.left_moving_up = true;
                 break;
@@ -34,6 +37,9 @@ public class Input extends KeyAdapter {
                 break;
             case 81:
                 game.is_running = false;
+                break;
+            case 82:
+                game.reset();
                 break;
 
             default:

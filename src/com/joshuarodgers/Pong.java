@@ -18,6 +18,7 @@ public class Pong{
     Input game_input;
     Physics physics;
     Collision collision;
+    Screen message_screen;
     Color background_color;
 
     Paddle left_paddle;
@@ -27,8 +28,10 @@ public class Pong{
     Point right_paddle_start_position;
     Point left_paddle_start_position;
     Color paddle_color;
+    boolean is_started;
     boolean is_running;
     boolean is_paused;
+    boolean is_over;
 
     Ball game_ball;
     int ball_width;
@@ -81,13 +84,14 @@ public class Pong{
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
 
         physics = new Physics(left_paddle, right_paddle, game_ball, game_surface);
-        collision = new Collision(game_surface, left_paddle, right_paddle, game_ball, physics);
+        collision = new Collision(this, left_paddle, right_paddle, game_ball, physics);
 
     }
 
     public void init_graphics(){
         ctx_game_surface = game_surface.getGraphics();
         ctx_game_surface.setFont(new Font("SANS_SERIF", 0, 36));
+        message_screen = new Screen(game_surface, ctx_game_surface);
     }
 
     public void render(){
@@ -103,10 +107,41 @@ public class Pong{
         ctx_game_surface.drawString(String.valueOf(right_paddle.score), (window_width / 4) + (window_width / 2), window_height / 4);
     }
 
+    public void winner(){
+        is_over = true;
+        if(left_paddle.score == 10){
+            message_screen.display("P1 WINS!!!");
+        }else{
+            message_screen.display("P2 WINS!!!");
+        }
+    }
+
+    public void reset(){
+        left_paddle_start_position = new Point(paddle_width / 2, game_surface.getHeight() / 2 - (paddle_height /2));
+        right_paddle_start_position = new Point(game_surface.getWidth() - (paddle_width + (paddle_width / 2)), game_surface.getHeight() / 2 - (paddle_height /2 ));
+        ball_start_position = new Point((game_surface.getWidth() / 2) - (ball_width / 2), (game_surface.getHeight() / 2) - (ball_height / 2));
+        left_paddle.position = left_paddle_start_position;
+        right_paddle.position = right_paddle_start_position;
+        game_ball.position = ball_start_position;
+        left_paddle.score = 0;
+        right_paddle.score = 0;
+        is_started = false;
+        is_paused = false;
+        is_over = false;
+    }
+
     public void run(){
         is_running = true;
         while(is_running){
-            if(!is_paused){
+            if(is_over){
+                try{
+                    render();
+                    winner();
+                    Thread.sleep(500);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }else if(!is_paused && is_started){
                 try{
                     physics.update();
                     collision.check_collision();
@@ -115,9 +150,18 @@ public class Pong{
                 }catch(Exception e){
                     e.printStackTrace();
                 }
-            }else{
+            }else if(is_paused && is_started){
                 try{
                     render();
+                    message_screen.display("PAUSED");
+                    Thread.sleep(500);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }else if(!is_started){
+                try{
+                    render();
+                    message_screen.display("Press SPACE to start");
                     Thread.sleep(500);
                 }catch(Exception e){
                     e.printStackTrace();

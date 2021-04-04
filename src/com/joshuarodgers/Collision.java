@@ -1,10 +1,9 @@
 package com.joshuarodgers;
 
-import java.awt.Panel;
 import java.util.Random;
 
 public class Collision {
-    Panel game_window;
+    Pong game;
     Paddle left;
     Paddle right;
     Ball ball;
@@ -16,16 +15,16 @@ public class Collision {
     int east;
     int west;
 
-    public Collision(Panel game_window, Paddle left, Paddle right, Ball ball, Physics physics){
+    public Collision(Pong game, Paddle left, Paddle right, Ball ball, Physics physics){
         this.physics = physics;
         this.ball = ball;
-        this.game_window = game_window;
+        this.game = game;
         this.left = left;
         this.right = right;
         random = new Random();
         north = 0;
-        south = this.game_window.getHeight();
-        east = this.game_window.getWidth();
+        south = this.game.game_window.getHeight();
+        east = this.game.game_window.getWidth();
         west = 0;
     }
 
@@ -50,15 +49,21 @@ public class Collision {
         }
         // CHECK EDGES
         if(ball.position.x <= west){
-            ball.position.x = game_window.getWidth() / 2;
-            ball.position.y = game_window.getHeight() /2;
+            ball.position.x = game.game_window.getWidth() / 2;
+            ball.position.y = game.game_window.getHeight() / 2;
             physics.ball_speed_y = 0;
             right.score++;
+            if(right.score == 10){
+                game.winner();
+            }
         }else if(ball.position.x + ball.width >= east){
-            ball.position.x = game_window.getWidth() / 2;
-            ball.position.y = game_window.getHeight() /2;
+            ball.position.x = game.game_window.getWidth() / 2;
+            ball.position.y = game.game_window.getHeight() / 2;
             physics.ball_speed_y = 0;
             left.score++;
+            if(left.score == 10){
+                game.winner();
+            }
         }else if(ball.position.y <= north){
             ball.y_direction = 1;
         }else if(ball.position.y + ball.height >= south){
