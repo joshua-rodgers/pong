@@ -10,6 +10,7 @@ public class Physics {
 
     int ball_speed_x;
     int ball_speed_y;
+    int volley_count;
 
     int paddle_speed;
     boolean left_moving_up;
@@ -22,22 +23,21 @@ public class Physics {
         this.right = right;
         this.ball = ball;
         this.game_surface = game_surface;
-
         paddle_speed = 10;
         ball_speed_x = 7;
-        
+        volley_count = 0;
     }
 
     public void move_paddle(int direction){
         switch(direction){
-            case 0: //UP
+            case 0: //P1 UP
                 if(left.position.y >= 0){
                     left.direction = -1;
                 }else{
                     left.direction = 0;
                 }
                 break;
-            case 1: //down
+            case 1: // P1 down
                 if(left.position.y + left.height <= game_surface.getHeight()){
                     left.direction = 1;
                 }else{
@@ -58,8 +58,14 @@ public class Physics {
                     right.direction = 0;
                 }
                 break;
+            }
+    }
+
+    public void speed_up(){
+        if(volley_count <= 10 && volley_count % 2 == 0){
+            ball_speed_x += 2;
+            paddle_speed += 2;
         }
-        
     }
 
     public void update(){

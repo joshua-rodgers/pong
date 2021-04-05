@@ -30,45 +30,62 @@ public class Collision {
 
     public void check_collision(){
         // CHECK PADDLES FIRST SINCE THEY ARE IN FRONT OF E&W EDGES
-        if(ball.position.x <= left.position.x + left.width){
-            if(ball.position.y >= left.position.y){
+        if(ball.position.x - physics.ball_speed_x <= left.position.x + left.width){
+            if(ball.position.y >= left.position.y || ball.position.y + ball.height >= left.position.y){
                 if(ball.position.y <= left.get_segment(1)){
                     ball.x_direction = 1;
                     physics.ball_speed_y = 5;
                     ball.y_direction = -1;
+                    physics.volley_count++;
+                    physics.speed_up();
                 }else if(ball.position.y <= left.get_segment(2)){
                     ball.x_direction = 1;
                     physics.ball_speed_y = 0;
                     ball.y_direction = 1;
+                    physics.volley_count++;
+                    physics.speed_up();
                 }else if(ball.position.y <= left.get_segment(3)){
                     ball.x_direction = 1;
                     physics.ball_speed_y = 0;
                     ball.y_direction = 1;
+                    physics.volley_count++;
+                    physics.speed_up();
                 }else if(ball.position.y <= left.get_segment(4)){
                     ball.x_direction = 1;
                     physics.ball_speed_y = 5;
                     ball.y_direction = 1;
+                    physics.volley_count++;
+                    physics.speed_up();
                 }
             }
-        }else if(ball.position.x >= right.position.x){
+        }else if(ball.position.x + physics.ball_speed_x >= right.position.x){
             if(ball.position.y >= right.position.y){
-                if(ball.position.y <= right.position.y + right.height){
+                if(ball.position.y <= right.position.y + right.height ||
+                ball.position.y + ball.height <= right.position.y){
                     if(ball.position.y <= right.get_segment(1)){
                         ball.x_direction = -1;
                         physics.ball_speed_y = 5;
                         ball.y_direction = -1;
+                        physics.volley_count++;
+                        physics.speed_up();
                     }else if(ball.position.y <= right.get_segment(2)){
                         ball.x_direction = -1;
                         physics.ball_speed_y = 0;
                         ball.y_direction = 1;
+                        physics.volley_count++;
+                        physics.speed_up();
                     }else if(ball.position.y <= right.get_segment(3)){
                         ball.x_direction = -1;
                         physics.ball_speed_y = 0;
                         ball.y_direction = 1;
+                        physics.volley_count++;
+                        physics.speed_up();
                     }else if(ball.position.y <= right.get_segment(4)){
                         ball.x_direction = -1;
                         physics.ball_speed_y = 5;
                         ball.y_direction = 1;
+                        physics.volley_count++;
+                        physics.speed_up();
                     }
                     
                 }
@@ -80,6 +97,9 @@ public class Collision {
             ball.position.y = game.game_window.getHeight() / 2;
             physics.ball_speed_y = 0;
             right.score++;
+            physics.volley_count = 0;
+            physics.paddle_speed = 10;
+            physics.ball_speed_x = 7;
             if(right.score == 10){
                 game.winner();
             }
@@ -88,6 +108,9 @@ public class Collision {
             ball.position.y = game.game_window.getHeight() / 2;
             physics.ball_speed_y = 0;
             left.score++;
+            physics.volley_count = 0;
+            physics.paddle_speed = 10;
+            physics.ball_speed_x = 7;
             if(left.score == 10){
                 game.winner();
             }

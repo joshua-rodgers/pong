@@ -11,8 +11,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Pong{
-    final int window_width = 500;
-    final int window_height = 500;
+    final int window_width = 800;
+    final int window_height = 600;
 
     Frame game_window;
     Panel game_surface;
@@ -81,7 +81,7 @@ public class Pong{
         paddle_color = Color.WHITE;
         right_paddle = new Paddle(paddle_width, paddle_height, right_paddle_start_position, paddle_color);
         left_paddle = new Paddle(paddle_width, paddle_height, left_paddle_start_position, paddle_color);
-        ball_width = 5;
+        ball_width = 10;
         ball_height = 10;
         ball_color = Color.GREEN;
         ball_start_position = new Point((game_surface.getWidth() / 2) - (ball_width / 2), (game_surface.getHeight() / 2) - (ball_height / 2));
@@ -104,7 +104,6 @@ public class Pong{
         ctx_back_buffer.clearRect(0, 0, game_surface.getWidth(), game_surface.getHeight());
         ctx_back_buffer.setColor(Color.WHITE);
         ctx_back_buffer.drawLine(game_surface.getWidth() / 2, 0, game_surface.getWidth() / 2, game_surface.getHeight());
-        ctx_back_buffer.drawLine(0, 200, 500, 200);
         ctx_back_buffer.setColor(game_ball.color); 
         ctx_back_buffer.fillRect(game_ball.position.x, game_ball.position.y, game_ball.width, game_ball.height);
         ctx_back_buffer.setColor(paddle_color);
