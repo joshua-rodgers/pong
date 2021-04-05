@@ -3,6 +3,25 @@ building pong. at last. the essence of 2d games. am i worthy?
 
 ## latest progress
 
+## variable intensity
+
+![pong gameplay demonstrating increasing play speed](demos/demo6.gif)
+
+ball speed increases with vollies. paddle speed also increases for fairness. its awesome having made it this
+far. i also fixed a bug that made it difficult to make shots off the top of the paddle. the way i was 
+checking paddle collisions, if the y position of the ball was above that of the paddle it would miss even 
+though the body of the ball extended to contact the paddle. simply adding an OR condition to check the 
+position of the entire body of the ball provided a fix there.
+
+i also made the playfield larger, from 500 x 500 to 800 x 600 to accomodate the increased speed. i could increase it further for more intensity. the mechanism is a counter, volley_count, and method, speed_up,
+ that tracks each 
+paddle collision and increases the ball_speed_x value of the physics object by two after every two vollies 
+up to 10. paddle speed also increases by two.  
+
+i've never worked with sound in java, but it seems perhaps thats the obvious next step...
+
+super proud of this one.
+
 ## predictible vollies
 
 ![pong gameplay demonstrating precisely aimed vollies](demos/demo5.gif)
