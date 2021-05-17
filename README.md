@@ -1,5 +1,5 @@
 # pong
-building pong. at last. the essence of 2d games. am i worthy?
+building pong. the essence of 2d games.
 
 ## latest progress
 
