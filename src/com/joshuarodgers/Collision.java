@@ -1,27 +1,24 @@
 package com.joshuarodgers;
 
-import java.util.Random;
-
 public class Collision {
     Pong game;
     Paddle left;
     Paddle right;
     Ball ball;
     Physics physics;
-    Random random;
 
     int north;
     int south;
     int east;
     int west;
 
-    public Collision(Pong game, Paddle left, Paddle right, Ball ball, Physics physics){
-        this.physics = physics;
-        this.ball = ball;
+    public Collision(Pong game){
         this.game = game;
-        this.left = left;
-        this.right = right;
-        random = new Random();
+        this.physics = game.physics;
+        this.ball = game.game_ball;
+        this.left = game.left_paddle;
+        this.right = game.right_paddle;
+
         north = 0;
         south = this.game.game_surface.getHeight();
         east = this.game.game_surface.getWidth();
@@ -59,9 +56,8 @@ public class Collision {
                 }
             }
         }else if(ball.position.x + physics.ball_speed_x >= right.position.x){
-            if(ball.position.y >= right.position.y){
-                if(ball.position.y <= right.position.y + right.height ||
-                ball.position.y + ball.height <= right.position.y){
+                if(ball.position.y >= right.position.y + right.height ||
+                ball.position.y + ball.height >= right.position.y){
                     if(ball.position.y <= right.get_segment(1)){
                         ball.x_direction = -1;
                         physics.ball_speed_y = 5;
@@ -89,7 +85,7 @@ public class Collision {
                     }
                     
                 }
-            }
+            
         }
         // CHECK EDGES
         if(ball.position.x <= west){
@@ -98,8 +94,8 @@ public class Collision {
             physics.ball_speed_y = 0;
             right.score++;
             physics.volley_count = 0;
-            physics.paddle_speed = 10;
-            physics.ball_speed_x = 7;
+            physics.paddle_speed = 15;
+            physics.ball_speed_x = 14;
             if(right.score == 10){
                 game.winner();
             }
@@ -109,8 +105,8 @@ public class Collision {
             physics.ball_speed_y = 0;
             left.score++;
             physics.volley_count = 0;
-            physics.paddle_speed = 10;
-            physics.ball_speed_x = 7;
+            physics.paddle_speed = 15;
+            physics.ball_speed_x = 14;
             if(left.score == 10){
                 game.winner();
             }

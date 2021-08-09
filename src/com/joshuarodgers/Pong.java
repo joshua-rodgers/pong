@@ -88,7 +88,7 @@ public class Pong{
         game_ball = new Ball(ball_width, ball_height, ball_start_position, ball_color);
 
         physics = new Physics(left_paddle, right_paddle, game_ball, game_surface);
-        collision = new Collision(this, left_paddle, right_paddle, game_ball, physics);
+        collision = new Collision(this);
 
     }
 
@@ -116,18 +116,17 @@ public class Pong{
         }else if(is_paused){
             message_screen.display("PAUSED");
         }else if(is_over){
-            winner();
+            if(left_paddle.score == 10){
+                message_screen.display("P1 WINS!!!");
+            }else{
+                message_screen.display("P2 WINS!!!");
+            }
         }
         ctx_game_surface.drawImage(back_buffer, 0, 0, null);
     }
 
     public void winner(){
         is_over = true;
-        if(left_paddle.score == 10){
-            message_screen.display("P1 WINS!!!");
-        }else{
-            message_screen.display("P2 WINS!!!");
-        }
     }
 
     public void reset(){

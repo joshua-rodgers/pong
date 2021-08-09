@@ -12,11 +12,8 @@ public class Input extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e) {
         int pressed = e.getKeyCode();
-        //System.out.println("down");
+        
         switch(pressed){
-            case 32:
-                game.is_started = true;
-                break;
             case 87: // p1 Up 'W'
                 game.physics.left_moving_up = true;
                 break;
@@ -32,13 +29,16 @@ public class Input extends KeyAdapter {
             case 40: // p2 down 'down arrow'
                 game.physics.right_moving_down = true;
                 break;
-            case 80:
+            case 32: // SPACEBAR - START
+                game.is_started = true;
+                break;
+            case 80: // P - PAUSE
                 game.is_paused = !game.is_paused;
                 break;
-            case 81:
+            case 81: // Q - QUIT
                 game.is_running = false;
                 break;
-            case 82:
+            case 82: // R - RESET
                 game.reset();
                 break;
 

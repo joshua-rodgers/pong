@@ -26,6 +26,6 @@ public class Screen {
     public void display(String message){
         ctx.setColor(message_color);
         ctx.setFont(message_font);
-        ctx.drawString(message, width / (message.length() / 2), height / 2);
+        ctx.drawString(message, (width / 2) - (message.length() * 10), height / 2);
     }
 }

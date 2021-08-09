@@ -23,8 +23,8 @@ public class Physics {
         this.right = right;
         this.ball = ball;
         this.game_surface = game_surface;
-        paddle_speed = 10;
-        ball_speed_x = 7;
+        paddle_speed = 15;
+        ball_speed_x = 14;
         volley_count = 0;
     }
 
